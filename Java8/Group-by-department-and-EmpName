@@ -1,0 +1,68 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Employee {
+
+    private int id;
+    private String name;
+    private String department;
+    private double salary;
+    private int age;
+
+    public Employee(int id, String name, String department, double salary, int age) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + department + ", " + salary + ")";
+    }
+}
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<Employee> employees = Arrays.asList(
+        new Employee(1, "John", "IT", 70000, 28),
+        new Employee(2, "Alice", "HR", 50000, 30),
+        new Employee(3, "Bob", "IT", 90000, 35),
+        new Employee(4, "David", "Finance", 60000, 40),
+        new Employee(5, "Emma", "HR", 75000, 27),
+        new Employee(6, "Chris", "Finance", 80000, 32)
+    );
+
+    Map<String, List<Employee>> results = employees.stream()
+    .collect(Collectors.groupingBy(Employee::getDepartment));
+
+    results.forEach((dept, empList) -> {
+      String names = empList.stream()
+      .map(Employee::getName)
+      .collect(Collectors.joining(", "));
+      System.out.println(dept + " -> " + names);
+    });
+  }
+}
