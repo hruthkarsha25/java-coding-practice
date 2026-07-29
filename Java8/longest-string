@@ -1,0 +1,14 @@
+import java.util.*;
+import java.util.stream.*;
+
+class longestString {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>(Arrays.asList("Java", "SpringBoot", "API"));
+        
+        String str = list.stream()
+        .max(Comparator.comparing(String::length))
+        .orElse(null);
+        
+        System.out.println(str);
+    }
+}
