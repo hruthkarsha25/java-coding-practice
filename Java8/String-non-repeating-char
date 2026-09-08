@@ -1,0 +1,28 @@
+import java.util.*;
+import java.util.stream.Collectors;
+class Main {
+    public static void main(String[] args) {
+        String str = "swiss";
+
+        Set<Character> seen = new HashSet<>();
+        Set<Character> repeated = new HashSet<>();
+
+         str.chars()
+            .mapToObj(c -> (char) c)
+            .forEach(c -> {
+                if(repeated.contains(c)) {
+                    return;
+                }
+            if(!seen.add(c)) {
+                repeated.add(c);
+            }
+            });
+
+        Optional<Character> s = str.chars()
+            .mapToObj(c -> (char) c)
+            .filter(c -> !repeated.contains(c))
+            .findFirst();
+
+        System.out.println(s.get());
+    }
+}
